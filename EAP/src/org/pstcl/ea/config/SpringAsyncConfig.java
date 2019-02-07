@@ -9,7 +9,7 @@ import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
 @EnableAsync
 public class SpringAsyncConfig { 
 
-	@Bean
+	@Bean(name="threadPoolTaskExecutorEAP")
 	public ThreadPoolTaskExecutor  threadPoolTaskExecutor() {
 		ThreadPoolTaskExecutor poolTaskExecutor= new ThreadPoolTaskExecutor();
 		poolTaskExecutor.setCorePoolSize(30);
