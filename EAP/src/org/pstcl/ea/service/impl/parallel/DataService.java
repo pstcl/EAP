@@ -22,6 +22,7 @@ import org.pstcl.ea.service.impl.LossReportService;
 import org.pstcl.ea.util.DateUtil;
 import org.pstcl.ea.util.EAUtil;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.ApplicationContext;
 import org.springframework.core.task.TaskExecutor;
 import org.springframework.scheduling.annotation.EnableAsync;
@@ -36,6 +37,7 @@ public class DataService extends EnergyAccountsService{
 	private ApplicationContext context;
 
 	@Autowired
+	@Qualifier(value="threadPoolTaskExecutorEAP")
 	private TaskExecutor taskExecutor; 
 
 
