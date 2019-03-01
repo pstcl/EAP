@@ -91,10 +91,10 @@ public class LocationMasterDaoImpl extends AbstractDaoSLDC<String, LocationMaste
 		return (List<LocationMaster>) crit.list();
 	}
 
-	
 
 
-	
+
+
 
 
 
