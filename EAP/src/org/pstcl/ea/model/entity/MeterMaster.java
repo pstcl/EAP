@@ -44,7 +44,7 @@ public class MeterMaster implements Serializable {
 
 	private String internalPTRatio ;
 
-	private LocationMaster locationMaster;
+//	private LocationMaster locationMaster;
 	private String meterCategory;
 	private String meterMake;
 	private String meterSrNo;
@@ -97,11 +97,11 @@ public class MeterMaster implements Serializable {
 	}
 
 	//bi-directional one-to-one association to LocationMaster
-	@OneToOne(fetch=FetchType.EAGER)
-	@JoinColumn(name="LocationId", unique=true)
-	public LocationMaster getLocationMaster() {
-		return this.locationMaster;
-	}
+//	@OneToOne(fetch=FetchType.EAGER)
+//	@JoinColumn(name="LocationId", unique=true)
+//	public LocationMaster getLocationMaster() {
+//		return this.locationMaster;
+//	}
 
 
 	@Column(length=45)
@@ -172,9 +172,9 @@ public class MeterMaster implements Serializable {
 	}
 
 
-	public void setLocationMaster(LocationMaster locationMaster) {
-		this.locationMaster = locationMaster;
-	}
+//	public void setLocationMaster(LocationMaster locationMaster) {
+//		this.locationMaster = locationMaster;
+//	}
 
 	public void setMeterCategory(String meterCategory) {
 		this.meterCategory = meterCategory;

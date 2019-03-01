@@ -15,45 +15,37 @@ import javax.persistence.UniqueConstraint;
 import org.pstcl.ea.util.EAUtil;
 
 
-@Entity
-@Table(name = "LOSS_REPORT_TABLE",uniqueConstraints={@UniqueConstraint(columnNames={"LOC_ID", "monthOfYear", "year"})})
 public class LossReportEntity implements Comparable<LossReportEntity> {
-	
-	
-	@Column(precision=EAUtil.DECIMAL_PRECESION_BOUNDARY_PT_IMPORT_EXPORT,scale=EAUtil.DECIMAL_SCALE_BOUNDARY_PT_IMPORT_EXPORT) private BigDecimal boundaryPtImportExportDifferenceMWH;
-	
-	@Column private Long daysInMonthCount;
-	@Column(precision=EAUtil.DECIMAL_PRECESION_BOUNDARY_PT_IMPORT_EXPORT,scale=EAUtil.DECIMAL_SCALE_BOUNDARY_PT_IMPORT_EXPORT) private BigDecimal exportBoundaryPtMWH;
-	
-	
-	@Column private Long exportWHFCount;
-	
-	@Column(precision=EAUtil.DECIMAL_PRECESION_BOUNDARY_PT_IMPORT_EXPORT,scale=EAUtil.DECIMAL_SCALE_BOUNDARY_PT_IMPORT_EXPORT) private BigDecimal exportWHFSum;
-	
-	@Column(precision=EAUtil.DECIMAL_PRECESION_BOUNDARY_PT_IMPORT_EXPORT,scale=EAUtil.DECIMAL_SCALE_BOUNDARY_PT_IMPORT_EXPORT) private BigDecimal importBoundaryPtMWH;
-	
-	@Column private Long importWHFCount;
-	
-	@Column(precision=EAUtil.DECIMAL_PRECESION_BOUNDARY_PT_IMPORT_EXPORT,scale=EAUtil.DECIMAL_SCALE_BOUNDARY_PT_IMPORT_EXPORT) private BigDecimal importWHFSum;
-	@ManyToOne 
-	@JoinColumn(name = "LOC_ID")
+
+
+	private BigDecimal boundaryPtImportExportDifferenceMWH;
+
+	private Long daysInMonthCount;
+	private BigDecimal exportBoundaryPtMWH;
+
+
+	private Long exportWHFCount;
+
+	private BigDecimal exportWHFSum;
+
+	private BigDecimal importBoundaryPtMWH;
+
+	private Long importWHFCount;
+
+	private BigDecimal importWHFSum;
 	private LocationMaster location;
-	
-	@Column private Integer lossReportOrder;
-	
-	@ManyToOne 
-	@JoinColumn(name = "METER_ID")
+
+	private Integer lossReportOrder;
+
 	private MeterMaster meterMaster;
-	@Column private Integer monthOfYear;
-	@Column(precision=EAUtil.DECIMAL_PRECESION_BOUNDARY_PT_IMPORT_EXPORT,scale=EAUtil.DECIMAL_SCALE_BOUNDARY_PT_IMPORT_EXPORT) private BigDecimal netMWH;
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Integer monthOfYear;
+	private BigDecimal netMWH;
 	private Integer txnId;
-	@Column private Integer year;
+	private Integer year;
 	@Override
 	public int compareTo(LossReportEntity o) {
 		int result=0;
-		
+
 		if(null!=location&&null!=o.location)
 		{
 			result=location.getLossReportOrder()-o.location.getLossReportOrder();
@@ -89,14 +81,14 @@ public class LossReportEntity implements Comparable<LossReportEntity> {
 	public BigDecimal getImportWHFSum() {
 		return importWHFSum;
 	}
-	
+
 	public LocationMaster getLocation() {
 		return location;
 	}
 
 
 
-	
+
 
 	public Integer getLossReportOrder() {
 		return lossReportOrder;
@@ -122,8 +114,8 @@ public class LossReportEntity implements Comparable<LossReportEntity> {
 	public void setDaysInMonthCount(Long daysInMonthCount) {
 		this.daysInMonthCount = daysInMonthCount;
 	}
-	
-	
+
+
 	public void setExportBoundaryPtMWH(BigDecimal exportBoundaryPtMWH) {
 		this.exportBoundaryPtMWH = exportBoundaryPtMWH;
 	}
@@ -133,7 +125,7 @@ public class LossReportEntity implements Comparable<LossReportEntity> {
 
 
 
-	
+
 	public void setExportWHFSum(BigDecimal exportWHFSum) {
 		this.exportWHFSum = exportWHFSum;
 	}

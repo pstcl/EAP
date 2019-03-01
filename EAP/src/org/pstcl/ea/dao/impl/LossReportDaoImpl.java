@@ -97,6 +97,8 @@ public class LossReportDaoImpl implements ILossReportDao {
 	public List<LossReportEntity> getDailyTransactionsProjection(String reportCriteria,Date startDate,Date endDate) {
 		
 		Long daysCount=DateUtil.daysBetweenDates(startDate,endDate);
+		
+		
 		Criteria critLocationList = getSession().createCriteria(LocationMaster.class);
 		if(null!=reportCriteria)
 		{
@@ -104,6 +106,8 @@ public class LossReportDaoImpl implements ILossReportDao {
 		}
 		critLocationList.setProjection(Projections.property("locationId"));
 		List <String> locationIdList=critLocationList.list();
+		
+		
 		Session session = getSession();
 		Criteria criteria = session.createCriteria(DailyTransaction.class);
 		if(locationIdList!=null){

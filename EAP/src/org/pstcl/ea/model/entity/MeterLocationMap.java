@@ -29,12 +29,7 @@ public class MeterLocationMap {
 	public void setId(int id) {
 		this.id = id;
 	}
-	public Integer getReportMonth() {
-		return reportMonth;
-	}
-	public void setReportMonth(Integer reportMonth) {
-		this.reportMonth = reportMonth;
-	}
+	
 	public Date getStartDate() {
 		return startDate;
 	}
@@ -59,7 +54,7 @@ public class MeterLocationMap {
 	public void setMeterMaster(MeterMaster meterMaster) {
 		this.meterMaster = meterMaster;
 	}
-	private Integer reportMonth;
+	
 	private Date startDate;
 	private Date endDate;
 	private LocationMaster locationMaster;

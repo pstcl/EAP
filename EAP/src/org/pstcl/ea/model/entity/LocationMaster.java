@@ -2,6 +2,7 @@ package org.pstcl.ea.model.entity;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
+import java.util.Set;
 
 import javax.persistence.*;
 
@@ -18,72 +19,56 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 public class LocationMaster implements Serializable {
 
 
+	@OneToMany(mappedBy="location")
+	private Set<LocationMFMap> externalMFMap;
+
+	@OneToMany(mappedBy="location")
+	private Set<MeterLocationMap> meterLocationMap;
 	
+	private static final long serialVersionUID = 1L;
+	private BoundaryTypeMaster boundaryTypeMaster;
+	private CircleMaster circleMaster;
 	
+	private DeviceTypeMaster deviceTypeMaster;
+
+	private DivisionMaster divisionMaster;
 	
-	@Column(precision=14,scale=2)
-	private BigDecimal externalMF;
-	private String externalPTRation;
+
 	private String externalCTRation;
-	
-	@Column(length=45)
-	public String getExternalCTRation() {
-		return this.externalCTRation;
-	}
-
-	@Column(length=45)
-	public String getExternalPTRation() {
-		return this.externalPTRation;
-	}
-	
-
-	public void setExternalCTRation(String externalCTRation) {
-		this.externalCTRation = externalCTRation;
-	}
 
 
 
 
-	public void setExternalPTRation(String externalPTRation) {
-		this.externalPTRation = externalPTRation;
-	}
+	//@Column(precision=14,scale=2)
+	//private BigDecimal externalMF;
 	
 	//Location here is location of meter. i.e. Bay
 
 
-	private static final long serialVersionUID = 1L;
+	private String externalPTRation;
 
 
 
-	private BoundaryTypeMaster boundaryTypeMaster;
-
-
-	private CircleMaster circleMaster;
-
-
-	private DeviceTypeMaster deviceTypeMaster;
-	private DivisionMaster divisionMaster;
 	private FeederMaster feederMaster;
+
+
 	private int id;
+
+
 	//added in august list
 	private String interfacePointId;
 	private String location_status;
 	private String locationId;
 	private String lossReportCriteria;
 	private Integer lossReportInclusion;
-
-	private Integer netWHSign;
 	private Integer lossReportOrder;
-
-
-	@JsonIgnore
-	private MeterMaster meterMaster;
-
+	
+	private Integer netWHSign;
 	private SubstationMaster substationMaster;
 
 	private String utiltiyName;
-
 	private String voltageLevel;
+
 
 	public LocationMaster() {
 	}
@@ -105,13 +90,13 @@ public class LocationMaster implements Serializable {
 		return true;
 	}
 
-
 	//bi-directional many-to-one association to BoundaryTypeMaster
 	@ManyToOne(fetch=FetchType.EAGER)
 	@JoinColumn(name="BOUNDARY_CODE")
 	public BoundaryTypeMaster getBoundaryTypeMaster() {
 		return this.boundaryTypeMaster;
 	}
+
 	@ManyToOne(fetch=FetchType.EAGER)
 	@JoinColumn(name="CR_code")
 	public CircleMaster getCircleMaster() {
@@ -131,13 +116,26 @@ public class LocationMaster implements Serializable {
 		return divisionMaster;
 	}
 
+
+	@Column(length=45)
+	public String getExternalCTRation() {
+		return this.externalCTRation;
+	}
+//	public BigDecimal getExternalMF() {
+//		return externalMF;
+//	}
+
+	@Column(length=45)
+	public String getExternalPTRation() {
+		return this.externalPTRation;
+	}
+
 	//bi-directional many-to-one association to FeederMaster
 	@ManyToOne(fetch=FetchType.EAGER)
 	@JoinColumn(name="FEEDER_CODE")
 	public FeederMaster getFeederMaster() {
 		return this.feederMaster;
 	}
-
 
 	@Column(nullable=false)
 	public int getId() {
@@ -149,6 +147,7 @@ public class LocationMaster implements Serializable {
 	public String getInterfacePointId() {
 		return interfacePointId;
 	}
+
 
 	@Column(length=45)
 	public String getLocation_status() {
@@ -162,14 +161,14 @@ public class LocationMaster implements Serializable {
 		return this.locationId;
 	}
 
-
-
-
-
 	@Column(length=45,name="LOSS_REPORT_CRITERIA")
 	public String getLossReportCriteria() {
 		return lossReportCriteria;
 	}
+
+
+
+
 
 	@Column(name = "LOSS_REPORT_INCLUSION")
 
@@ -177,16 +176,26 @@ public class LocationMaster implements Serializable {
 		return lossReportInclusion;
 	}
 
-
-	//bi-directional one-to-one association to MeterMaster
-	@JsonIgnore
-	@OneToOne(mappedBy="locationMaster", fetch=FetchType.EAGER)
-	public MeterMaster getMeterMaster() {
-		return this.meterMaster;
+	@Column
+	public Integer getLossReportOrder() {
+		return lossReportOrder;
 	}
 
 
+//	//bi-directional one-to-one association to MeterMaster
+//	@JsonIgnore
+//	@OneToOne(mappedBy="locationMaster", fetch=FetchType.EAGER)
+//	public MeterMaster getMeterMaster() {
+//		return this.meterMaster;
+//	}
 
+
+
+
+	@Column
+	public Integer getNetWHSign() {
+		return netWHSign;
+	}
 
 	//bi-directional many-to-one association to SubstationMaster
 	@ManyToOne(fetch=FetchType.EAGER)
@@ -195,16 +204,17 @@ public class LocationMaster implements Serializable {
 		return this.substationMaster;
 	}
 
+
 	@Column(length=45)
 	public String getUtiltiyName() {
 		return this.utiltiyName;
 	}
 
-
 	@Column(length=45)
 	public String getVoltageLevel() {
 		return this.voltageLevel;
 	}
+
 
 	@Override
 	public int hashCode() {
@@ -214,22 +224,35 @@ public class LocationMaster implements Serializable {
 		return result;
 	}
 
-
 	public void setBoundaryTypeMaster(BoundaryTypeMaster boundaryTypeMaster) {
 		this.boundaryTypeMaster = boundaryTypeMaster;
 	}
+
 
 	public void setCircleMaster(CircleMaster circleMaster) {
 		this.circleMaster = circleMaster;
 	}
 
-
 	public void setDeviceTypeMaster(DeviceTypeMaster deviceTypeMaster) {
 		this.deviceTypeMaster = deviceTypeMaster;
 	}
 
+
 	public void setDivisionMaster(DivisionMaster divisionMaster) {
 		this.divisionMaster = divisionMaster;
+	}
+
+	public void setExternalCTRation(String externalCTRation) {
+		this.externalCTRation = externalCTRation;
+	}
+
+
+//	public void setExternalMF(BigDecimal externalMF) {
+//		this.externalMF = externalMF;
+//	}
+
+	public void setExternalPTRation(String externalPTRation) {
+		this.externalPTRation = externalPTRation;
 	}
 
 
@@ -251,9 +274,13 @@ public class LocationMaster implements Serializable {
 	}
 
 
+
+
+
 	public void setLocationId(String locationId) {
 		this.locationId = locationId;
 	}
+
 
 	public void setLossReportCriteria(String lossReportCriteria) {
 		this.lossReportCriteria = lossReportCriteria;
@@ -264,53 +291,29 @@ public class LocationMaster implements Serializable {
 		this.lossReportInclusion = lossReportInclusion;
 	}
 
-	public void setMeterMaster(MeterMaster meterMaster) {
-		this.meterMaster = meterMaster;
+	public void setLossReportOrder(Integer lossReportOrder) {
+		this.lossReportOrder = lossReportOrder;
 	}
 
-
-
-
-
-	public void setSubstationMaster(SubstationMaster substationMaster) {
-		this.substationMaster = substationMaster;
-	}
-
-
-	public void setUtiltiyName(String utiltiyName) {
-		this.utiltiyName = utiltiyName;
-	}
-
-
-	public void setVoltageLevel(String voltageLevel) {
-		this.voltageLevel = voltageLevel;
-	}
-
-	@Column
-	public Integer getNetWHSign() {
-		return netWHSign;
-	}
+//	public void setMeterMaster(MeterMaster meterMaster) {
+//		this.meterMaster = meterMaster;
+//	}
 
 	public void setNetWHSign(Integer netWHSign) {
 		this.netWHSign = netWHSign;
 	}
 
-	@Column
-	public Integer getLossReportOrder() {
-		return lossReportOrder;
-	}
-
-	public void setLossReportOrder(Integer lossReportOrder) {
-		this.lossReportOrder = lossReportOrder;
+	public void setSubstationMaster(SubstationMaster substationMaster) {
+		this.substationMaster = substationMaster;
 	}
 
 	
-	public BigDecimal getExternalMF() {
-		return externalMF;
+	public void setUtiltiyName(String utiltiyName) {
+		this.utiltiyName = utiltiyName;
 	}
 
-	public void setExternalMF(BigDecimal externalMF) {
-		this.externalMF = externalMF;
+	public void setVoltageLevel(String voltageLevel) {
+		this.voltageLevel = voltageLevel;
 	}
 
 }
