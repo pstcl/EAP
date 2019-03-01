@@ -20,7 +20,7 @@ public class LocationMaster implements Serializable {
 
 
 	@OneToMany(mappedBy="location")
-	private Set<LocationMFMap> externalMFMap;
+	private Set<LocationEMF> externalMFMap;
 
 	@OneToMany(mappedBy="location")
 	private Set<MeterLocationMap> meterLocationMap;
@@ -59,11 +59,9 @@ public class LocationMaster implements Serializable {
 	private String interfacePointId;
 	private String location_status;
 	private String locationId;
-	private String lossReportCriteria;
-	private Integer lossReportInclusion;
+	
 	private Integer lossReportOrder;
 	
-	private Integer netWHSign;
 	private SubstationMaster substationMaster;
 
 	private String utiltiyName;
@@ -161,20 +159,7 @@ public class LocationMaster implements Serializable {
 		return this.locationId;
 	}
 
-	@Column(length=45,name="LOSS_REPORT_CRITERIA")
-	public String getLossReportCriteria() {
-		return lossReportCriteria;
-	}
-
-
-
-
-
-	@Column(name = "LOSS_REPORT_INCLUSION")
-
-	public Integer getLossReportInclusion() {
-		return lossReportInclusion;
-	}
+	
 
 	@Column
 	public Integer getLossReportOrder() {
@@ -192,10 +177,7 @@ public class LocationMaster implements Serializable {
 
 
 
-	@Column
-	public Integer getNetWHSign() {
-		return netWHSign;
-	}
+
 
 	//bi-directional many-to-one association to SubstationMaster
 	@ManyToOne(fetch=FetchType.EAGER)
@@ -282,14 +264,6 @@ public class LocationMaster implements Serializable {
 	}
 
 
-	public void setLossReportCriteria(String lossReportCriteria) {
-		this.lossReportCriteria = lossReportCriteria;
-	}
-
-
-	public void setLossReportInclusion(Integer lossReportInclusion) {
-		this.lossReportInclusion = lossReportInclusion;
-	}
 
 	public void setLossReportOrder(Integer lossReportOrder) {
 		this.lossReportOrder = lossReportOrder;
@@ -299,9 +273,7 @@ public class LocationMaster implements Serializable {
 //		this.meterMaster = meterMaster;
 //	}
 
-	public void setNetWHSign(Integer netWHSign) {
-		this.netWHSign = netWHSign;
-	}
+	
 
 	public void setSubstationMaster(SubstationMaster substationMaster) {
 		this.substationMaster = substationMaster;

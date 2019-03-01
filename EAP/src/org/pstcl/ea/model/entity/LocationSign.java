@@ -14,24 +14,28 @@ import javax.persistence.Table;
 @Entity
 @Table(name="location_mf_map")
 @NamedQuery(name="LocationMFMap.findAll", query="SELECT m FROM LocationMFMap m")
-public class LocationMFMap {
-	
-	private Date endDate;
+public class LocationSign {
 	
 	
-	@Column(precision=14,scale=2)
-	private BigDecimal externalMF;
+	
+	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	int id;
 	
+	
 	private LocationMaster locationMaster;
+	
+	@Column
+	private Integer netWHSign;
+	
 	private Date startDate;
+	private Date endDate;
+	
+	
 	public Date getEndDate() {
 		return endDate;
-	}
-	public BigDecimal getExternalMF() {
-		return externalMF;
 	}
 	public int getId() {
 		return id;
@@ -39,24 +43,27 @@ public class LocationMFMap {
 	public LocationMaster getLocationMaster() {
 		return locationMaster;
 	}
+	public Integer getNetWHSign() {
+		return netWHSign;
+	}
 	public Date getStartDate() {
 		return startDate;
 	}
 	public void setEndDate(Date endDate) {
 		this.endDate = endDate;
 	}
-	public void setExternalMF(BigDecimal externalMF) {
-		this.externalMF = externalMF;
-	}
-	
-
 	public void setId(int id) {
 		this.id = id;
 	}
-
+	
 
 	public void setLocationMaster(LocationMaster locationMaster) {
 		this.locationMaster = locationMaster;
+	}
+
+
+	public void setNetWHSign(Integer netWHSign) {
+		this.netWHSign = netWHSign;
 	}
 	public void setStartDate(Date startDate) {
 		this.startDate = startDate;
